@@ -10,6 +10,7 @@ import org.security.security.aggregates.response.BaseResponse;
 public interface AuthenticationService {
     UsuarioDTO signUpUser(SignUpRequest signUpRequest) throws Exception;
     UsuarioDTO signUpAdmin(SignUpRequest signUpRequest) throws Exception;
-    AuthDTO signIn(SignInRequest signInRequest) throws Exception;
+    //AuthDTO signIn(SignInRequest signInRequest) throws Exception;
+    AuthDTO signIn(SignInRequest signInRequest);
     UsuarioDTO findUsuarioById(Long id) throws Exception;
 }

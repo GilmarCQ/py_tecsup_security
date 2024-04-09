@@ -11,6 +11,8 @@ import org.security.security.aggregates.response.HttpResMessage;
 import org.security.security.service.AuthenticationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -44,11 +46,14 @@ public class AuthController {
 
     @PostMapping("/signin")
     public ResponseEntity<Object> signIn(@RequestBody SignInRequest signInRequest) {
-        try {
-            return ResponseEntity.status(200).body(authenticationService.signIn(signInRequest));
-        } catch (Exception ex) {
-            return ResponseEntity.status(404).body(HttpResMessage.builder().message(ex.getMessage()).build());
-        }
+        return ResponseEntity.status(200).body(authenticationService.signIn(signInRequest));
+        //try {
+        //    return ResponseEntity.status(200).body(authenticationService.signIn(signInRequest));
+        //} catch (BadCredentialsException ex) {
+        //    return ResponseEntity.status(404).body(HttpResMessage.builder().message("Usuario o contraseña son incorrectos.").build());
+        //} catch (Exception ex) {
+        //    return ResponseEntity.status(404).body(HttpResMessage.builder().message(ex.getMessage()).build());
+        //}
     }
 
     @GetMapping("/{id}")

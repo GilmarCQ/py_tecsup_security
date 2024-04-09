@@ -21,6 +21,7 @@ import org.security.security.service.JWTService;
 import org.security.security.utils.Util;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -86,13 +87,12 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
-    public AuthDTO signIn(SignInRequest signInRequest) throws Exception {
+    public AuthDTO signIn(SignInRequest signInRequest) {
         //  validar parametros de entrada
-        if (!valParamsSignIn(signInRequest))
-            throw new Exception();
-
+       // if (!valParamsSignIn(signInRequest))
+         //   throw new Exception(message);
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                signInRequest.getCorreo(), signInRequest.getPassword()));
+                    signInRequest.getCorreo(), signInRequest.getPassword()));
 
         var usuario = usuarioRepository.findByCorreo(signInRequest.getCorreo())
                 .orElseThrow(() -> new IllegalArgumentException("Correo, " + Constants.MESS_PARAMS_ERROR));

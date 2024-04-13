@@ -6,6 +6,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.security.security.service.JWTService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -49,9 +50,10 @@ public class JWTServiceImpl implements JWTService {
                 .parseClaimsJws(token)
                 .getBody();
     }
-
+    @Value("${hash_token}")
+    private String hash_token;
     private Key getSignKey() {
-        byte[] key = Decoders.BASE64URL.decode("85732b878c0f544da4a863804775ef3914e8ccb82b08820a278302c5b826e291");
+        byte[] key = Decoders.BASE64URL.decode(hash_token);
         return Keys.hmacShaKeyFor(key);
     }
 

@@ -72,7 +72,10 @@
 			<artifactId>spring-cloud-starter-openfeign</artifactId>
 		</dependency>
 
-
+		<!--<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-vault-config</artifactId>
+		</dependency>-->
 
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
